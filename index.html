@@ -1163,14 +1163,14 @@
                     if (displayName === 'Sedili') {
                         // Move right and up a tiny bit
                         labelLng += 0.15;  // right
-                        labelLat += 0.60;  // up
+                        labelLat += 0.80;  // up
                     } else if (displayName === 'Singapore') {
                         // Move just to the right a tiny bit
-                        labelLng += 0.28;  // right
+                        labelLng += 0.3;  // right
                         labelLat += 0.20;  // up
                     } else if (location === 'Batam') {
                         // Move down a medium bit
-                        labelLat -= 0.4;   // down
+                        labelLat -= 0.6;   // down
                     }
                     
                     labelMarker = L.marker([labelLat, labelLng], {
@@ -1230,7 +1230,19 @@
             const cableList = document.getElementById('cable-list');
             
             // Add all cables
-            cables.forEach(cable => {
+            // Add all cables
+            const plannedCables = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2', 'scnx-combined'];
+            
+            // Sort cables: existing first, then planned
+            const sortedCables = cables.sort((a, b) => {
+                const aIsPlanned = plannedCables.includes(a.properties.id);
+                const bIsPlanned = plannedCables.includes(b.properties.id);
+                if (aIsPlanned && !bIsPlanned) return 1;
+                if (!aIsPlanned && bIsPlanned) return -1;
+                return 0;
+            });
+            
+            sortedCables.forEach(cable => {
                 console.log('Adding cable:', cable.properties.name);
                 const layer = createCableLayer(cable);
                 cableLayers[cable.properties.id] = layer;
