@@ -169,7 +169,7 @@
             
             // Initialize the map
             const map = L.map('map', {
-                center: [20, 0],
+                center: [20, 160],
                 zoom: 1,
                 minZoom: 2,
                 maxZoom: 8,
@@ -180,11 +180,34 @@
             // Add ESRI gray canvas (very minimal)
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri',
-                maxZoom: 16,
-                continuousWorld: true,
-                noWrap: false,
-                bounds: [[-90, -270], [90, 270]]
+                maxZoom: 16
+                // continuousWorld: true,
+                // noWrap: false,
+                // bounds: [[-90, -270], [90, 270]]
             }).addTo(map);
+
+            function fixDateLineCrossing(coordinates) {
+                const fixed = [];
+                for (let i = 0; i < coordinates.length; i++) {
+                    const segment = coordinates[i];
+                    const fixedSegment = [];
+                    
+                    for (let j = 0; j < segment.length; j++) {
+                        let [lng, lat] = segment[j];
+                        
+                        // If we're in the western Pacific (negative longitude near date line)
+                        // convert to positive equivalent (e.g., -170 becomes 190)
+                        if (lng < -150) {
+                            lng = lng + 360;
+                        }
+                        
+                        fixedSegment.push([lng, lat]);
+                    }
+                    fixed.push(fixedSegment);
+                }
+                return fixed;
+            }
+
             // Store all cable layers
             const cableLayers = {};
             
@@ -955,7 +978,11 @@
             function createCableLayer(cable) {
                 // Check if this is a planned cable
                 const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2'].includes(cable.properties.id);
-                
+                const pacificCables = ['asia-america-gateway-aag-cable-system', 'bifrost', 'echo', 'sea-us'];
+                    if (pacificCables.includes(cable.properties.id)) {
+                        cable = JSON.parse(JSON.stringify(cable)); // Deep copy
+                        cable.geometry.coordinates = fixDateLineCrossing(cable.geometry.coordinates);
+                    }
                 const cableLayer = L.geoJSON(cable, {
                     style: {
                         color: cable.properties.color || '#4eb748',
