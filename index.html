@@ -114,7 +114,7 @@
         /* Landing point label styles */
         .landing-label {
             color: #2d00c8;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 500;
             background: none;
             border: none;
@@ -250,7 +250,7 @@
                     "properties": {
                         "id": "bifrost",
                         "name": "Bifrost",
-                        "color": "##939597"
+                        "color": "#939597"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -984,8 +984,7 @@
             // Function to create custom triangle icon
             function createTriangleIcon() {
                 return L.divIcon({
-                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(-45deg);"></div>',                    className: 'triangle-marker',
-                    iconSize: [8, 8],
+                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(135deg);"></div>',                    iconSize: [8, 8],
                     iconAnchor: [4, 4]
                 });
             }
@@ -1007,7 +1006,9 @@
                 
                 // List of points to completely remove
                 const removePoints = ['Kauditan', 'Mersing', 'Changi', 'Changi North', 'Tanshui', 
-                                      'Nanhui', 'Chikura', 'Minamiboso'];
+                                      'Nanhui', 'Chikura', 'Minamiboso', 'Karachi', 'Cherating', 
+                                      'Ngeremlengui', 'Magachgil', 'Quy Nhon', 'Chung Hom Kok', 
+                                      'Tseung Kwan O'];
                 
                 // Country codes mapping
                 const countryCodes = {
