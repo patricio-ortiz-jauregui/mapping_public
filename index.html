@@ -10,13 +10,13 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a1a;
+            background: #f5f5f5;
         }
         
         #map {
             width: 100%;
             height: 100vh;
-            background: #0a141f;
+            background: #e8e8e8;
         }
         
         #loading {
@@ -24,7 +24,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: white;
+            color: #333;
             font-size: 18px;
             z-index: 1000;
         }
@@ -34,29 +34,29 @@
             top: 20px;
             right: 20px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 15px;
+            padding: 12px 15px;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
             z-index: 1000;
             max-height: 80vh;
             overflow-y: auto;
-            min-width: 250px;
-            display: none; /* Hidden until map loads */
+            min-width: 200px;
+            display: none;
         }
         
         .legend h3 {
-            margin: 0 0 15px 0;
-            font-size: 16px;
+            margin: 0 0 10px 0;
+            font-size: 15px;
             color: #333;
         }
         
         .cable-item {
             display: flex;
             align-items: center;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
             cursor: pointer;
-            padding: 5px;
-            border-radius: 4px;
+            padding: 3px 5px;
+            border-radius: 3px;
             transition: background-color 0.2s;
         }
         
@@ -69,15 +69,16 @@
         }
         
         .cable-color {
-            width: 20px;
+            width: 18px;
             height: 3px;
-            margin-right: 10px;
+            margin-right: 8px;
             border-radius: 2px;
         }
         
         .cable-name {
-            font-size: 14px;
+            font-size: 13px;
             color: #444;
+            line-height: 1.2;
         }
         
         /* Custom tooltip styles */
@@ -108,6 +109,22 @@
             color: #666;
             font-size: 11px;
             margin-top: 2px;
+        }
+        
+        /* Landing point label styles */
+        .landing-label {
+            color: #2d00c8;
+            font-size: 12px;
+            font-weight: 500;
+            background: none;
+            border: none;
+            box-shadow: none;
+            white-space: nowrap;
+        }
+        
+        /* Override Leaflet's default tile background */
+        .leaflet-container {
+            background: #e8e8e8;
         }
     </style>
 </head>
@@ -149,8 +166,8 @@
                 worldCopyJump: true
             });
 
-            // Add a dark ocean-style base map
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            // Add a light grey base map
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
                 subdomains: 'abcd',
                 maxZoom: 19
@@ -169,7 +186,7 @@
                     "properties": {
                         "id": "apricot",
                         "name": "Apricot",
-                        "color": "#939597"
+                        "color": "#ff6b35"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -193,7 +210,7 @@
                     "properties": {
                         "id": "asia-link-cable-alc",
                         "name": "Asia Link Cable (ALC)",
-                        "color": "#939597"
+                        "color": "#00a8cc"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -205,7 +222,7 @@
                     "properties": {
                         "id": "asia-pacific-gateway-apg",
                         "name": "Asia Pacific Gateway (APG)",
-                        "color": "#b63894"
+                        "color": "#9c27b0"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -217,7 +234,7 @@
                     "properties": {
                         "id": "asia-america-gateway-aag-cable-system",
                         "name": "Asia-America Gateway (AAG) Cable System",
-                        "color": "#69479c"
+                        "color": "#3f51b5"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -229,7 +246,7 @@
                     "properties": {
                         "id": "bifrost",
                         "name": "Bifrost",
-                        "color": "#939597"
+                        "color": "#8b5a3c"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -241,7 +258,7 @@
                     "properties": {
                         "id": "echo",
                         "name": "Echo",
-                        "color": "#939597"
+                        "color": "#e91e63"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -253,7 +270,7 @@
                     "properties": {
                         "id": "india-asia-xpress-iax",
                         "name": "India Asia Xpress (IAX)",
-                        "color": "#939597"
+                        "color": "#4a148c"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -264,8 +281,8 @@
                     "type": "Feature",
                     "properties": {
                         "id": "india-asia-xpress-iax-2",
-                        "name": "India Asia Xpress (IAX)",
-                        "color": "#ced528"
+                        "name": "India Asia Xpress (IAX) 2",
+                        "color": "#ffc107"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -277,7 +294,7 @@
                     "properties": {
                         "id": "mist",
                         "name": "MIST",
-                        "color": "#a84c9c"
+                        "color": "#f44336"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -325,7 +342,7 @@
                     "properties": {
                         "id": "tata-tgn-tata-indicom",
                         "name": "Tata TGN-Tata Indicom",
-                        "color": "#94a139"
+                        "color": "#009688"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -335,80 +352,120 @@
             ];
 
             // ============================================
-            // LANDING POINTS DATA
+            // LANDING POINTS DATA (from paste-2.txt)
             // ============================================
             
             const landingPoints = [
                 {
                     "properties": {
-                        "name": "Singapore, Singapore"
+                        "name": "Agat, Guam"
                     },
                     "geometry": {
-                        "coordinates": [103.8537, 1.2938]
+                        "coordinates": [144.65753000000052, 13.385309999999615]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Jakarta, Indonesia"
+                        "name": "Alexandria, Egypt"
                     },
                     "geometry": {
-                        "coordinates": [106.8278, -6.1716]
+                        "coordinates": [29.889799154879793, 31.191886381300385]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Davao, Philippines"
+                        "name": "Alupang, Guam"
                     },
                     "geometry": {
-                        "coordinates": [125.611111, 7.073056]
+                        "coordinates": [144.776754, 13.490037]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Florence, OR, United States"
+                        "name": "Annaba, Algeria"
                     },
                     "geometry": {
-                        "coordinates": [-124.1, 43.98]
+                        "coordinates": [7.755439835067562, 36.902343529231146]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Lanikai, HI, United States"
+                        "name": "Baler, Philippines"
                     },
                     "geometry": {
-                        "coordinates": [-157.719, 21.396]
+                        "coordinates": [121.56018214238252, 15.7615293728581]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Redondo Beach, CA, United States"
+                        "name": "Batam, Indonesia"
                     },
                     "geometry": {
-                        "coordinates": [-118.39, 33.84]
+                        "coordinates": [104.01664054897991, 1.066796188550793]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Miura, Japan"
+                        "name": "Batangas, Philippines"
                     },
                     "geometry": {
-                        "coordinates": [139.62, 35.17]
+                        "coordinates": [121.06492987806165, 13.765553306627538]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Chikura, Japan"
+                        "name": "Bauang, Philippines"
                     },
                     "geometry": {
-                        "coordinates": [139.97, 34.97]
+                        "coordinates": [120.35558309999966, 16.51402480000008]
                     }
                 },
                 {
                     "properties": {
-                        "name": "Mumbai, India"
+                        "name": "Bizerte, Tunisia"
                     },
                     "geometry": {
-                        "coordinates": [72.87, 19.07]
+                        "coordinates": [9.867352401468954, 37.276349513656555]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Busan, South Korea"
+                    },
+                    "geometry": {
+                        "coordinates": [128.99929925728011, 35.17014221411413]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Changi, Singapore"
+                    },
+                    "geometry": {
+                        "coordinates": [104.00411409999965, 1.373499297000449]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Changi North, Singapore"
+                    },
+                    "geometry": {
+                        "coordinates": [103.9870122887188, 1.389044778364265]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Changi South, Singapore"
+                    },
+                    "geometry": {
+                        "coordinates": [103.9870122887188, 1.389044778364265]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Cherating, Malaysia"
+                    },
+                    "geometry": {
+                        "coordinates": [103.39365333405976, 4.130238298773818]
                     }
                 },
                 {
@@ -416,7 +473,479 @@
                         "name": "Chennai, India"
                     },
                     "geometry": {
-                        "coordinates": [80.27, 13.08]
+                        "coordinates": [80.24308379664043, 13.06348539106232]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Chikura, Japan"
+                    },
+                    "geometry": {
+                        "coordinates": [139.95466259014782, 34.976657744880164]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Chongming, China"
+                    },
+                    "geometry": {
+                        "coordinates": [121.39520308159317, 31.619883221433906]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Chung Hom Kok, China"
+                    },
+                    "geometry": {
+                        "coordinates": [114.2030206766037, 22.222049985803473]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Colombo, Sri Lanka"
+                    },
+                    "geometry": {
+                        "coordinates": [79.87199030952667, 6.926734329228445]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Cox's Bazar, Bangladesh"
+                    },
+                    "geometry": {
+                        "coordinates": [91.99493094027171, 21.42917958893072]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Danang, Vietnam"
+                    },
+                    "geometry": {
+                        "coordinates": [108.21474366875417, 16.051559827539638]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Davao, Philippines"
+                    },
+                    "geometry": {
+                        "coordinates": [125.61277821882337, 7.079988883160643]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Digha, India"
+                    },
+                    "geometry": {
+                        "coordinates": [87.50654093847432, 21.621856500843982]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Eureka, CA, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-124.159554, 40.803255000000355]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Fangshan, Taiwan"
+                    },
+                    "geometry": {
+                        "coordinates": [120.66209813218148, 22.249258581382197]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Fujairah, United Arab Emirates"
+                    },
+                    "geometry": {
+                        "coordinates": [56.33372573425405, 25.12169311729696]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Grover Beach, CA, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-120.62142234655879, 35.1206334382351]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Hermosa Beach, CA, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-118.39954892055475, 33.862232632157735]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Hulhumale, Maldives"
+                    },
+                    "geometry": {
+                        "coordinates": [73.54015885755544, 4.211942635751779]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Jakarta, Indonesia"
+                    },
+                    "geometry": {
+                        "coordinates": [106.82785500280222, -6.171598654655946]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Jeddah, Saudi Arabia"
+                    },
+                    "geometry": {
+                        "coordinates": [39.18276132165815, 21.481258967424996]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Karachi, Pakistan"
+                    },
+                    "geometry": {
+                        "coordinates": [67.02854237669561, 24.88937409747322]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Kauditan, Indonesia"
+                    },
+                    "geometry": {
+                        "coordinates": [125.06561063769091, 1.378623021535939]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Keawaula, HI, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-158.2420376129735, 21.548768815961424]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Kuala Sedili, Malaysia"
+                    },
+                    "geometry": {
+                        "coordinates": [104.11414260000058, 1.925879632999907]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "La Union, Philippines"
+                    },
+                    "geometry": {
+                        "coordinates": [120.38963738769527, 16.582590683428545]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Lantau Island, China"
+                    },
+                    "geometry": {
+                        "coordinates": [113.94833335702553, 22.271491582355683]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Lingang, China"
+                    },
+                    "geometry": {
+                        "coordinates": [121.89608163301598, 30.935661747314708]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Lingshui, China"
+                    },
+                    "geometry": {
+                        "coordinates": [110.04937200000029, 18.389897000000236]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Luna, Philippines"
+                    },
+                    "geometry": {
+                        "coordinates": [120.35484390000022, 16.830712289999493]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Machilipatnam, India"
+                    },
+                    "geometry": {
+                        "coordinates": [81.13951857354486, 16.175049115204825]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Magachgil, Yap, Micronesia"
+                    },
+                    "geometry": {
+                        "coordinates": [138.06149986878208, 9.443922836169385]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Makaha, HI, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-158.2206478576183, 21.463431186887963]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Manado, Indonesia"
+                    },
+                    "geometry": {
+                        "coordinates": [124.83960982123124, 1.490831387793467]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Maruyama, Japan"
+                    },
+                    "geometry": {
+                        "coordinates": [139.97546699999984, 35.005432999999265]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Marseille, France"
+                    },
+                    "geometry": {
+                        "coordinates": [5.372629023073098, 43.29316463678684]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Matara, Sri Lanka"
+                    },
+                    "geometry": {
+                        "coordinates": [80.53986093015084, 5.940833037393244]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Melaka, Malaysia"
+                    },
+                    "geometry": {
+                        "coordinates": [102.22090025859913, 2.273178376445331]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Mersing, Malaysia"
+                    },
+                    "geometry": {
+                        "coordinates": [103.84990301084824, 2.295511672819276]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Minamiboso, Japan"
+                    },
+                    "geometry": {
+                        "coordinates": [139.9609790000003, 34.9740779999996]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Morib, Malaysia"
+                    },
+                    "geometry": {
+                        "coordinates": [101.4436141980139, 2.751191204441439]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Morro Bay, CA, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-120.84720343661348, 35.3666813511006]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Mumbai, India"
+                    },
+                    "geometry": {
+                        "coordinates": [72.87590151562159, 19.07579693373203]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Nanhui, China"
+                    },
+                    "geometry": {
+                        "coordinates": [121.92506915087795, 30.864713861582327]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Ngeremlengui, Palau"
+                    },
+                    "geometry": {
+                        "coordinates": [134.56094082517401, 7.531746239289517]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Palermo, Italy"
+                    },
+                    "geometry": {
+                        "coordinates": [13.358365553402518, 38.12150089552133]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Piti, Guam"
+                    },
+                    "geometry": {
+                        "coordinates": [144.69474214461212, 13.464655237903562]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Quy Nhon, Vietnam"
+                    },
+                    "geometry": {
+                        "coordinates": [109.21965018343205, 13.782957863531687]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Rosarito, Mexico"
+                    },
+                    "geometry": {
+                        "coordinates": [-117.06377809999996, 32.357601899999985]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Satun, Thailand"
+                    },
+                    "geometry": {
+                        "coordinates": [100.06611799999914, 6.613467]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Shantou, China"
+                    },
+                    "geometry": {
+                        "coordinates": [116.67547986258927, 23.354554663214007]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Shima, Japan"
+                    },
+                    "geometry": {
+                        "coordinates": [136.87439133474103, 34.33683057441225]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Songkhla, Thailand"
+                    },
+                    "geometry": {
+                        "coordinates": [100.5951000000003, 7.198819999999446]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Sriracha, Thailand"
+                    },
+                    "geometry": {
+                        "coordinates": [100.93056914143179, 13.174368777461584]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Suez, Egypt"
+                    },
+                    "geometry": {
+                        "coordinates": [32.53012931569517, 29.9722883988634]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Tanguisson Point, Guam"
+                    },
+                    "geometry": {
+                        "coordinates": [144.80934665104422, 13.549098008782185]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Tanjung Pakis, Indonesia"
+                    },
+                    "geometry": {
+                        "coordinates": [107.12089678739565, -5.981255891395774]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Tanshui, Taiwan"
+                    },
+                    "geometry": {
+                        "coordinates": [121.46258584635854, 25.18136115573805]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Toucheng, Taiwan"
+                    },
+                    "geometry": {
+                        "coordinates": [121.80145279380189, 24.863592858849902]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Tseung Kwan O, China"
+                    },
+                    "geometry": {
+                        "coordinates": [114.25868469966966, 22.31829585896108]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Tuas, Singapore"
+                    },
+                    "geometry": {
+                        "coordinates": [103.64707112328632, 1.338192522185158]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Tungku, Brunei"
+                    },
+                    "geometry": {
+                        "coordinates": [114.88583269289208, 4.926371091877179]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Vung Tau, Vietnam"
+                    },
+                    "geometry": {
+                        "coordinates": [107.07919759818566, 10.341846070577743]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Winema, OR, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-123.97340470108611, 45.146590041565254]
                     }
                 }
             ];
@@ -460,18 +989,23 @@
                 return cableLayer;
             }
             
+            // Function to create custom triangle icon
+            function createTriangleIcon() {
+                return L.divIcon({
+                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(45deg);"></div>',
+                    className: 'triangle-marker',
+                    iconSize: [8, 8],
+                    iconAnchor: [4, 4]
+                });
+            }
+            
             // Function to create landing point markers
             function createLandingPointMarker(point) {
                 const coords = point.geometry.coordinates;
-                const marker = L.circleMarker(
+                const marker = L.marker(
                     [coords[1], coords[0]], // Leaflet uses [lat, lng]
                     {
-                        radius: 5,
-                        fillColor: 'white',
-                        color: '#333',
-                        weight: 2,
-                        opacity: 1,
-                        fillOpacity: 1
+                        icon: createTriangleIcon()
                     }
                 );
                 
@@ -491,7 +1025,20 @@
                     }
                 );
                 
-                return marker;
+                // Add permanent label
+                const label = L.divIcon({
+                    html: `<div class="landing-label">${location}</div>`,
+                    className: 'landing-label-icon',
+                    iconSize: null,
+                    iconAnchor: [-10, 0]
+                });
+                
+                const labelMarker = L.marker([coords[1], coords[0]], {
+                    icon: label,
+                    interactive: false
+                });
+                
+                return {marker: marker, label: labelMarker};
             }
             
             // Create legend item
@@ -545,13 +1092,16 @@
             // Add all landing points
             console.log('Adding', landingPoints.length, 'landing points');
             const landingPointGroup = L.layerGroup();
+            const landingLabelGroup = L.layerGroup();
             
             landingPoints.forEach(point => {
-                const marker = createLandingPointMarker(point);
+                const {marker, label} = createLandingPointMarker(point);
                 landingPointGroup.addLayer(marker);
+                landingLabelGroup.addLayer(label);
             });
             
             landingPointGroup.addTo(map);
+            landingLabelGroup.addTo(map);
             
             console.log('Map initialization complete!');
         }
