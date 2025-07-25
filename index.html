@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submarine Cable Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100vh;
+            background: #0a141f;
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            z-index: 1000;
+        }
+        
+        .legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-height: 80vh;
+            overflow-y: auto;
+            min-width: 250px;
+            display: none; /* Hidden until map loads */
+        }
+        
+        .legend h3 {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: #333;
+        }
+        
+        .cable-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+        
+        .cable-item:hover {
+            background-color: #f0f0f0;
+        }
+        
+        .cable-item.hidden {
+            opacity: 0.4;
+        }
+        
+        .cable-color {
+            width: 20px;
+            height: 3px;
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+        
+        .cable-name {
+            font-size: 14px;
+            color: #444;
+        }
+        
+        /* Custom tooltip styles */
+        .leaflet-tooltip.cable-tooltip {
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 12px;
+            font-size: 13px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .leaflet-tooltip.landing-tooltip {
+            background: white;
+            color: #333;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        
+        .landing-name {
+            font-weight: bold;
+            font-size: 13px;
+        }
+        
+        .landing-country {
+            color: #666;
+            font-size: 11px;
+            margin-top: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="loading">Loading map...</div>
+    <div class="legend" id="legend">
+        <h3>Submarine Cables</h3>
+        <div id="cable-list"></div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Wait for everything to load
+        window.addEventListener('load', function() {
+            // Check if Leaflet loaded
+            if (typeof L === 'undefined') {
+                document.getElementById('loading').innerHTML = 'Error: Leaflet failed to load. Please check your internet connection.';
+                return;
+            }
+            
+            console.log('Leaflet loaded successfully');
+            initializeEverything();
+        });
+        
+        function initializeEverything() {
+            // Hide loading message
+            document.getElementById('loading').style.display = 'none';
+            
+            // Show legend
+            document.getElementById('legend').style.display = 'block';
+            
+            // Initialize the map
+            const map = L.map('map', {
+                center: [20, 0],
+                zoom: 2,
+                minZoom: 2,
+                maxZoom: 8,
+                worldCopyJump: true
+            });
+
+            // Add a dark ocean-style base map
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            // Store all cable layers
+            const cableLayers = {};
+            
+            // ============================================
+            // CABLE DATA - ADD YOUR CABLES HERE
+            // ============================================
+            
+            const cables = [
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "id": "apricot",
+                        "name": "Apricot",
+                        "color": "#939597"
+                    },
+                    "geometry": {
+                        "type": "MultiLineString",
+                        "coordinates": [
+                            [[103.64609081207688,1.338585852071497],[103.83750067588413,1.182753739294242],[104.02421554420971,1.202092036773615],[104.14960045538582,1.18452336036332],[104.17500043679628,1.018409236452146],[104.2875003576961,0.962292662396848],[104.40000027800004,0.849806826211382],[104.8499999592161,0.68107206531244],[106.19999900286416,-0.331409329660265],[109.12499692898021,-3.029995968008661],[109.79999645080431,-3.479268678970064],[112.0499948586722,-4.60145376483711],[114.60984933620142,-5.273944363641298],[116.80810148738884,-4.179995582158629],[117.7124908479029,-2.730375485267853],[117.96440181128685,-1.51533365197483],[118.76628430204579,-0.810555324740758],[119.47498959873617,0.568578852526193],[119.69998943934421,1.018534216615524],[120.59998880177636,1.580886840914131],[124.19998625090851,3.41655961832325],[126.57346403647036,5.404676658378629],[128.24998338185245,7.447522319872199],[127.34998401942048,11.882475268284509],[125.54998529455636,16.24638821747719],[126.44998465639262,18.251816319028222],[127.34998401942048,19.24608308700458],[130.94998146974444,20.796306105108872],[138.59997605041642,23.7112581424843],[139.72497525286053,24.94136317175375],[140.84997445649643,30.901396088515508],[141.07497429710446,32.43331330641721],[140.96247437680054,33.93964008831966],[140.56872465573645,34.405022750715936],[140.37184979460858,34.69072647741027],[140.1046624838865,34.852445708846155],[139.9609790000003,34.9740779999996]]
+                        ]
+                    }
+                },
+                // ADD MORE CABLES HERE IN THE SAME FORMAT
+                // Example:
+                // {
+                //     "type": "Feature",
+                //     "properties": {
+                //         "id": "sea-us",
+                //         "name": "SEA-US",
+                //         "color": "#4eb748"
+                //     },
+                //     "geometry": {
+                //         "type": "MultiLineString",
+                //         "coordinates": [[ /* coordinates here */ ]]
+                //     }
+                // },
+            ];
+
+            // ============================================
+            // LANDING POINTS DATA - ADD YOUR LANDING POINTS HERE  
+            // ============================================
+            
+            const landingPoints = [
+                {
+                    "properties": {
+                        "name": "Singapore, Singapore"
+                    },
+                    "geometry": {
+                        "coordinates": [103.8537, 1.2938]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Jakarta, Indonesia"
+                    },
+                    "geometry": {
+                        "coordinates": [106.8278, -6.1716]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Davao, Philippines"
+                    },
+                    "geometry": {
+                        "coordinates": [125.611111, 7.073056]
+                    }
+                },
+                {
+                    "properties": {
+                        "name": "Florence, OR, United States"
+                    },
+                    "geometry": {
+                        "coordinates": [-124.1, 43.98]
+                    }
+                },
+                // ADD ALL YOUR LANDING POINTS HERE
+                // Format: {"properties": {"name": "City, Country"}, "geometry": {"coordinates": [longitude, latitude]}}
+            ];
+
+            // Function to create cable layer
+            function createCableLayer(cable) {
+                const cableLayer = L.geoJSON(cable, {
+                    style: {
+                        color: cable.properties.color || '#4eb748',
+                        weight: 3,
+                        opacity: 0.8,
+                        smoothFactor: 1
+                    }
+                });
+                
+                // Add interactivity
+                cableLayer.eachLayer(function(layer) {
+                    // Add tooltip - FIXED SPELLING!
+                    layer.bindTooltip(cable.properties.name, {
+                        permanent: false,
+                        direction: 'top',
+                        className: 'cable-tooltip'
+                    });
+                    
+                    // Hover effects
+                    layer.on('mouseover', function(e) {
+                        layer.setStyle({
+                            weight: 5,
+                            opacity: 1
+                        });
+                    });
+                    
+                    layer.on('mouseout', function(e) {
+                        layer.setStyle({
+                            weight: 3,
+                            opacity: 0.8
+                        });
+                    });
+                });
+                
+                return cableLayer;
+            }
+            
+            // Function to create landing point markers
+            function createLandingPointMarker(point) {
+                const coords = point.geometry.coordinates;
+                const marker = L.circleMarker(
+                    [coords[1], coords[0]], // Leaflet uses [lat, lng]
+                    {
+                        radius: 5,
+                        fillColor: 'white',
+                        color: '#333',
+                        weight: 2,
+                        opacity: 1,
+                        fillOpacity: 1
+                    }
+                );
+                
+                // Parse name
+                const parts = point.properties.name.split(', ');
+                const location = parts[0];
+                const country = parts.slice(1).join(', ');
+                
+                // Add tooltip - FIXED SPELLING!
+                marker.bindTooltip(
+                    `<div class="landing-name">${location}</div><div class="landing-country">${country}</div>`,
+                    {
+                        permanent: false,
+                        direction: 'top',
+                        offset: [0, -10],
+                        className: 'landing-tooltip'
+                    }
+                );
+                
+                return marker;
+            }
+            
+            // Create legend item
+            function createLegendItem(cable) {
+                const item = document.createElement('div');
+                item.className = 'cable-item';
+                item.dataset.cableId = cable.properties.id;
+                
+                const colorBox = document.createElement('div');
+                colorBox.className = 'cable-color';
+                colorBox.style.backgroundColor = cable.properties.color || '#4eb748';
+                
+                const name = document.createElement('div');
+                name.className = 'cable-name';
+                name.textContent = cable.properties.name;
+                
+                item.appendChild(colorBox);
+                item.appendChild(name);
+                
+                // Click to toggle visibility
+                item.addEventListener('click', function() {
+                    const cableId = this.dataset.cableId;
+                    const layer = cableLayers[cableId];
+                    
+                    if (map.hasLayer(layer)) {
+                        map.removeLayer(layer);
+                        this.classList.add('hidden');
+                    } else {
+                        map.addLayer(layer);
+                        this.classList.remove('hidden');
+                    }
+                });
+                
+                return item;
+            }
+            
+            // Initialize map with data
+            const cableList = document.getElementById('cable-list');
+            
+            // Add all cables
+            cables.forEach(cable => {
+                console.log('Adding cable:', cable.properties.name);
+                const layer = createCableLayer(cable);
+                cableLayers[cable.properties.id] = layer;
+                layer.addTo(map);
+                
+                const legendItem = createLegendItem(cable);
+                cableList.appendChild(legendItem);
+            });
+            
+            // Add all landing points
+            console.log('Adding', landingPoints.length, 'landing points');
+            const landingPointGroup = L.layerGroup();
+            
+            landingPoints.forEach(point => {
+                const marker = createLandingPointMarker(point);
+                landingPointGroup.addLayer(marker);
+            });
+            
+            landingPointGroup.addTo(map);
+            
+            console.log('Map initialization complete!');
+        }
+    </script>
+</body>
+</html>
