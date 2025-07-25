@@ -100,7 +100,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .map-tiles-inverted {
-            filter: invert(0.5) contrast(1.5) brightness(1.2);
+            filter: invert(-0.3) contrast(1.5) brightness(1.2);
         }
         .landing-name {
             font-weight: bold;
@@ -178,10 +178,9 @@
 
             // Add a light grey base map with no labels
             // Add ESRI gray canvas (very minimal)
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri',
-                maxZoom: 16,
-                className: 'map-tiles-inverted'
+                maxZoom: 16
             }).addTo(map);
             // Store all cable layers
             const cableLayers = {};
@@ -1022,14 +1021,14 @@
                 const removePoints = ['Kauditan', 'Mersing', 'Changi', 'Changi North', 'Tanshui', 
                                       'Nanhui', 'Chikura', 'Minamiboso', 'Karachi', 'Cherating', 
                                       'Ngeremlengui', 'Magachgil', 'Quy Nhon', 'Chung Hom Kok', 
-                                      'Tseung Kwan O', 'Colombo', 'Sriracha', 'Tanshui', 'Toucheng ];
+                                      'Tseung Kwan O'];
                 
                 // Country codes mapping
                 const countryCodes = {
                     'Malaysia': 'MYS', 'Singapore': 'SGP', 'Indonesia': 'IDN', 
                     'Philippines': 'PHL', 'Japan': 'JPN', 'China': 'CHN',
                     'Thailand': 'THA', 'Vietnam': 'VNM', 'India': 'IND',
-                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD', 'South Korea': 'KOR'
+                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD'
                 };
                 
                 // Parse name
