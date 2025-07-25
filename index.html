@@ -1026,15 +1026,14 @@
                                       'Nanhui', 'Chikura', 'Minamiboso', 'Karachi', 'Cherating', 
                                       'Ngeremlengui', 'Magachgil', 'Quy Nhon', 'Chung Hom Kok', 
                                       'Tseung Kwan O', 'Agat', 'Alupang', 'Tanguisson Point',
-                                      'Toucheng', 'Colombo', 'Batangas', 'Makaha', 'Morro Bay', 'Hermosa Beach'];
+                                      'Toucheng', 'Colombo', 'Batangas'];
                 
                 // Country codes mapping
                 const countryCodes = {
                     'Malaysia': 'MYS', 'Singapore': 'SGP', 'Indonesia': 'IDN', 
                     'Philippines': 'PHL', 'Japan': 'JPN', 'China': 'CHN',
                     'Thailand': 'THA', 'Vietnam': 'VNM', 'India': 'IND',
-                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD', 'South Korea': 'KQR',
-                    'United States': 'USA', 'Mexico': MEX
+                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD', 'South Korea': 'KQR'
                 };
                 
                 // Parse name
@@ -1064,19 +1063,6 @@
                     displayName = 'Guam';
                     displayCountry = 'Guam';
                 }
-                if (location === 'Keawaula') {
-                    displayName = 'Hawaii';
-                    displayCountry = 'USA';
-                }
-                if (location === 'Grover Beach') {
-                    displayCountry = 'USA';
-                }
-                if (location === 'Rosarito') {
-                    displayCountry = 'MEX';
-                }
-                if (location === 'Eureka' || location === 'Winema') {
-                    displayCountry = 'USA';
-                }
                 if (location === 'Kuala Sedili') displayName = 'Sedili';
                 
                 // Add country code
@@ -1086,7 +1072,7 @@
                 // Check if we should hide the name
                 const shouldHideName = hideNames.some(name => location.includes(name));
                 // List of major cities that should have bigger labels
-                const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan', 'Grover Beach', 'Rosarito', 'Eureka', 'Winema', 'Hawaii'];                const isMajorCity = majorCities.includes(displayName);
+                const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan'];                const isMajorCity = majorCities.includes(displayName);
                 // Add tooltip only if not hiding name
                 if (!shouldHideName) {
                     marker.bindTooltip(
