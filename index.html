@@ -110,7 +110,11 @@
             font-size: 11px;
             margin-top: 2px;
         }
-        
+        .triangle-marker {
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
         /* Landing point label styles */
         .landing-label {
             color: #2d00c8;
@@ -172,9 +176,9 @@
 
             // Add a light grey base map with no labels
             // Add ESRI gray canvas (very minimal)
-            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri',
-                maxZoom: 16
+            L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+                maxZoom: 20
             }).addTo(map);
             // Store all cable layers
             const cableLayers = {};
@@ -189,7 +193,7 @@
                     "properties": {
                         "id": "apricot",
                         "name": "Apricot",
-                        "color": "#ff6b35"
+                        "color": "#d97559"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -201,7 +205,7 @@
                     "properties": {
                         "id": "asia-direct-cable-adc",
                         "name": "Asia Direct Cable (ADC)",
-                        "color": "#ed1b2c"
+                        "color": "#c94450"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -213,7 +217,7 @@
                     "properties": {
                         "id": "asia-link-cable-alc",
                         "name": "Asia Link Cable (ALC)",
-                        "color": "#00a8cc"
+                        "color": "#4a95a8"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -225,7 +229,7 @@
                     "properties": {
                         "id": "asia-pacific-gateway-apg",
                         "name": "Asia Pacific Gateway (APG)",
-                        "color": "#9c27b0"
+                        "color": "#8c5894"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -237,7 +241,7 @@
                     "properties": {
                         "id": "asia-america-gateway-aag-cable-system",
                         "name": "Asia-America Gateway (AAG) Cable System",
-                        "color": "#3f51b5"
+                        "color": "#6873a0"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -261,7 +265,7 @@
                     "properties": {
                         "id": "echo",
                         "name": "Echo",
-                        "color": "#e91e63"
+                        "color": "#c15478"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -273,7 +277,7 @@
                     "properties": {
                         "id": "india-asia-xpress-iax",
                         "name": "India Asia Xpress (IAX) 1, 2",
-                        "color": "#ffc107"
+                        "color": "#d4a843"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -285,7 +289,7 @@
                     "properties": {
                         "id": "mist",
                         "name": "MIST",
-                        "color": "#f44336"
+                        "color": "#c96660"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -297,7 +301,7 @@
                     "properties": {
                         "id": "sea-us",
                         "name": "SEA-US",
-                        "color": "#4eb748"
+                        "color": "#749d71"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -309,7 +313,7 @@
                     "properties": {
                         "id": "seamewe-4",
                         "name": "SeaMeWe-4",
-                        "color": "#187bb6"
+                        "color": "#507e9a"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -321,7 +325,7 @@
                     "properties": {
                         "id": "southeast-asia-japan-cable-2-sjc2",
                         "name": "Southeast Asia-Japan Cable 2 (SJC2)",
-                        "color": "#cfc12a"
+                        "color": "#ada558"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -333,7 +337,7 @@
                     "properties": {
                         "id": "tata-tgn-tata-indicom",
                         "name": "Tata TGN-Tata Indicom",
-                        "color": "#009688"
+                        "color": "#4a8078"
                     },
                     "geometry": {
                         "type": "MultiLineString",
