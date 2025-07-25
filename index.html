@@ -1090,13 +1090,14 @@
                     if (displayName === 'Sedili') {
                         // Move right and up a tiny bit
                         labelLng += 0.20;  // right
-                        labelLat += 0.28;  // up
+                        labelLat += 0.40;  // up
                     } else if (displayName === 'Singapore') {
                         // Move just to the right a tiny bit
                         labelLng += 0.28;  // right
+                        labelLat += 0.05;  // up
                     } else if (location === 'Batam') {
                         // Move down a medium bit
-                        labelLat -= 0.3;   // down
+                        labelLat -= 0.2;   // down
                     }
                     
                     labelMarker = L.marker([labelLat, labelLng], {
