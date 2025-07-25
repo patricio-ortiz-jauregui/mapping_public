@@ -1054,9 +1054,9 @@
                 const parts = point.properties.name.split(', ');
                 const location = parts[0];
                 const country = parts.slice(1).join(', ');
-                if (country.includes('United States')) {
-                    country = 'United States';
-                }
+                // if (country.includes('United States')) {
+                //     country = 'United States';
+                // }
                 // Check if we should skip this point entirely
                 if (removePoints.some(name => location.includes(name))) {
                     return null;
@@ -1073,7 +1073,7 @@
                 if (location === 'Maruyama') displayName = 'Tokyo';
                 if (location === 'Piti') {
                     displayName = 'Guam';
-                    displayCountry = 'United States';
+                    displayCountry = 'Guam';
                 }
                 if (location === 'Keawaula') {
                     displayName = 'Hawaii';
