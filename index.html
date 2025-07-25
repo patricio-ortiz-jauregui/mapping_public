@@ -176,10 +176,9 @@
 
             // Add a light grey base map with no labels
             // Add ESRI gray canvas (very minimal)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-                subdomains: 'abcd',
-                maxZoom: 19
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 16
             }).addTo(map);
             // Store all cable layers
             const cableLayers = {};
@@ -988,7 +987,9 @@
             // Function to create custom triangle icon
             function createTriangleIcon() {
                 return L.divIcon({
-                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(135deg);"></div>',                    iconSize: [8, 8],
+                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(135deg);"></div>',
+                    className: '',  // Add this line to remove default Leaflet styling
+                    iconSize: [8, 8],
                     iconAnchor: [4, 4]
                 });
             }
