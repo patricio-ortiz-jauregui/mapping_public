@@ -100,7 +100,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .map-tiles-inverted {
-            filter: invert(0.55) contrast(0.95) brightness(1.2);
+            filter: invert(0.55) contrast(0.95) brightness(3.2);
         }
         .landing-name {
             font-weight: bold;
@@ -1124,7 +1124,17 @@
                 
                 const colorBox = document.createElement('div');
                 colorBox.className = 'cable-color';
-                colorBox.style.backgroundColor = cable.properties.color || '#4eb748';
+                
+                // Check if this is a planned cable
+                const isPlanned = ['echo', 'bifrost'].includes(cable.properties.id);
+                
+                if (isPlanned) {
+                    // Create dashed line using gradient
+                    colorBox.style.background = `repeating-linear-gradient(90deg, ${cable.properties.color || '#4eb748'} 0px, ${cable.properties.color || '#4eb748'} 6px, transparent 6px, transparent 12px)`;
+                } else {
+                    // Solid color for existing cables
+                    colorBox.style.backgroundColor = cable.properties.color || '#4eb748';
+                }
                 
                 const name = document.createElement('div');
                 name.className = 'cable-name';
