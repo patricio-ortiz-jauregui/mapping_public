@@ -1026,7 +1026,7 @@
                                       'Nanhui', 'Chikura', 'Minamiboso', 'Karachi', 'Cherating', 
                                       'Ngeremlengui', 'Magachgil', 'Quy Nhon', 'Chung Hom Kok', 
                                       'Tseung Kwan O', 'Agat', 'Alupang', 'Tanguisson Point',
-                                      'Toucheng', 'Colombo', 'Batangas'];
+                                      'Toucheng', 'Colombo', 'Batangas', 'Makaha', 'Morro Bay', 'Hermosa Beach'];
                 
                 // Country codes mapping
                 const countryCodes = {
@@ -1062,6 +1062,10 @@
                 if (['Agat', 'Alupang', 'Piti', 'Tanguisson Point'].includes(location)) {
                     displayName = 'Guam';
                     displayCountry = 'Guam';
+                }
+                if (location === 'Keawaula') {
+                    displayName = 'Hawaii';
+                    displayCountry = 'USA';
                 }
                 if (location === 'Kuala Sedili') displayName = 'Sedili';
                 
