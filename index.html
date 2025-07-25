@@ -147,6 +147,7 @@
     </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.antimeridian@3.1.0/antimeridian.js"></script>
     <script>
         // Wait for everything to load
         window.addEventListener('load', function() {
@@ -956,17 +957,30 @@
                 // Check if this is a planned cable
                 const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2'].includes(cable.properties.id);
                 
+                // Use Leaflet.antimeridian to handle date line crossing
                 const cableLayer = L.geoJSON(cable, {
                     style: {
                         color: cable.properties.color || '#4eb748',
                         weight: 3,
                         opacity: 0.8,
                         smoothFactor: 1,
-                        // Add dash pattern for planned cables
                         dashArray: isPlanned ? '10, 10' : null
+                    },
+                    coordsToLatLng: function(coords) {
+                        return L.latLng(coords[1], L.Util.wrapNum(coords[0], [-180, 180], true));
                     }
                 });
-                            
+                
+                // Apply antimeridian wrapping if available
+                if (typeof L.Wrapped !== 'undefined') {
+                    cableLayer.eachLayer(function(layer) {
+                        if (layer instanceof L.Polyline) {
+                            layer.options.wrap = true;
+                            layer._setLatLngs(layer.getLatLngs());
+                        }
+                    });
+                }
+                                    
                 // Add interactivity
                 cableLayer.eachLayer(function(layer) {
                     // Add tooltip
