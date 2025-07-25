@@ -1073,15 +1073,33 @@
                 }
                 
                 // Add permanent label only if not hiding name
+                // Add permanent label only if not hiding name
                 let labelMarker = null;
                 if (!shouldHideName) {
                     const label = L.divIcon({
-                        html: `<div class="landing-label${isMajorCity ? ' major-city' : ''}">${fullDisplayName}</div>`,                        className: 'landing-label-icon',
+                        html: `<div class="landing-label${isMajorCity ? ' major-city' : ''}">${fullDisplayName}</div>`,
+                        className: 'landing-label-icon',
                         iconSize: null,
                         iconAnchor: [-10, 0]
                     });
                     
-                    labelMarker = L.marker([coords[1], coords[0]], {
+                    // Apply position offsets for overlapping cities
+                    let labelLat = coords[1];
+                    let labelLng = coords[0];
+                    
+                    if (displayName === 'Sedili') {
+                        // Move right and up a tiny bit
+                        labelLng += 0.15;  // right
+                        labelLat += 0.08;  // up
+                    } else if (displayName === 'Singapore') {
+                        // Move just to the right a tiny bit
+                        labelLng += 0.08;  // right
+                    } else if (location === 'Batam') {
+                        // Move down a medium bit
+                        labelLat -= 0.2;   // down
+                    }
+                    
+                    labelMarker = L.marker([labelLat, labelLng], {
                         icon: label,
                         interactive: false
                     });
