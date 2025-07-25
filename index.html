@@ -121,7 +121,11 @@
             box-shadow: none;
             white-space: nowrap;
         }
-        
+        /* Bigger labels for major cities */
+        .landing-label.major-city {
+            font-size: 14px;
+            font-weight: 600;
+        }
         /* Override Leaflet's default tile background */
         .leaflet-container {
             background: #e8e8e8;
@@ -246,7 +250,7 @@
                     "properties": {
                         "id": "bifrost",
                         "name": "Bifrost",
-                        "color": "#8b5a3c"
+                        "color": "##939597"
                     },
                     "geometry": {
                         "type": "MultiLineString",
@@ -269,24 +273,12 @@
                     "type": "Feature",
                     "properties": {
                         "id": "india-asia-xpress-iax",
-                        "name": "India Asia Xpress (IAX)",
-                        "color": "#4a148c"
-                    },
-                    "geometry": {
-                        "type": "MultiLineString",
-                        "coordinates": [[[81.13951857354486,16.175049115204825],[82.01872118892727,15.044700164166894],[81.82223885811331,11.127589656424089]],[[87.50654093847432,21.613825026350842],[88.64575957688014,2.546897235759658]]]
-                    }
-                },
-                {
-                    "type": "Feature",
-                    "properties": {
-                        "id": "india-asia-xpress-iax-2",
-                        "name": "India Asia Xpress (IAX) 2",
+                        "name": "India Asia Xpress (IAX) 1, 2",
                         "color": "#ffc107"
                     },
                     "geometry": {
                         "type": "MultiLineString",
-                        "coordinates": [[[72.87590151562159,19.066189490208128],[71.32502370862383,16.965102599435927],[71.04513590397801,13.492128176464083],[72.50491087570272,9.361978911833972],[74.70002131774494,6.688675551202349],[75.37502083897188,5.659359572411489],[78.3000187674719,3.715978119298069],[79.65001781052403,3.191933974144809],[81.00001685476798,2.817450442654169],[85.500013666928,1.918228780215599],[90.00001047908802,2.817450442654169],[92.70000856638391,4.613591578862773],[94.27500745064,5.510071711803246],[95.40000665368001,6.069699469736006],[97.42500521915215,5.622041180883233],[98.10000474097609,5.286069860821008],[98.88750418310413,4.613591578862773],[100.01250338614413,3.266814816815666],[101.25000250948806,2.143087178471855],[102.15000187192003,1.805788280129153],[102.68279723997186,1.558264177552469],[103.34065102845322,1.383978004154865],[103.50000091556807,1.327518855965853],[103.64609081207688,1.338585852071497]],[[79.65001781052403,3.191933974144809],[80.43751725265209,5.435413643888211],[80.53985718074962,5.940820740520149]],[[98.10000474097609,5.286069860821008],[99.00000410340806,5.957818681088533],[100.06611334816643,6.613518860854109]],[[101.25000250948806,2.143087178471855],[101.41875238934823,2.592701464601932],[101.44360237174425,2.751228763607222]],[[75.37502083897188,5.659359572411489],[74.25002163652778,4.613591578862773],[73.54035213926461,4.212345781871782]],[[85.500013666928,1.918228780215599],[83.92501477969205,5.510071711803246],[83.2500152596562,7.744876956882131],[82.80001557844011,9.52441134501949],[81.45001653598388,11.735650161405832],[80.24298739105474,13.06385310188338]]]
+                        "coordinates": [[[81.13951857354486,16.175049115204825],[82.01872118892727,15.044700164166894],[81.82223885811331,11.127589656424089]],[[87.50654093847432,21.613825026350842],[88.64575957688014,2.546897235759658]],[[72.87590151562159,19.066189490208128],[71.32502370862383,16.965102599435927],[71.04513590397801,13.492128176464083],[72.50491087570272,9.361978911833972],[74.70002131774494,6.688675551202349],[75.37502083897188,5.659359572411489],[78.3000187674719,3.715978119298069],[79.65001781052403,3.191933974144809],[81.00001685476798,2.817450442654169],[85.500013666928,1.918228780215599],[90.00001047908802,2.817450442654169],[92.70000856638391,4.613591578862773],[94.27500745064,5.510071711803246],[95.40000665368001,6.069699469736006],[97.42500521915215,5.622041180883233],[98.10000474097609,5.286069860821008],[98.88750418310413,4.613591578862773],[100.01250338614413,3.266814816815666],[101.25000250948806,2.143087178471855],[102.15000187192003,1.805788280129153],[102.68279723997186,1.558264177552469],[103.34065102845322,1.383978004154865],[103.50000091556807,1.327518855965853],[103.64609081207688,1.338585852071497]],[[79.65001781052403,3.191933974144809],[80.43751725265209,5.435413643888211],[80.53985718074962,5.940820740520149]],[[98.10000474097609,5.286069860821008],[99.00000410340806,5.957818681088533],[100.06611334816643,6.613518860854109]],[[101.25000250948806,2.143087178471855],[101.41875238934823,2.592701464601932],[101.44360237174425,2.751228763607222]],[[75.37502083897188,5.659359572411489],[74.25002163652778,4.613591578862773],[73.54035213926461,4.212345781871782]],[[85.500013666928,1.918228780215599],[83.92501477969205,5.510071711803246],[83.2500152596562,7.744876956882131],[82.80001557844011,9.52441134501949],[81.45001653598388,11.735650161405832],[80.24298739105474,13.06385310188338]]]
                     }
                 },
                 {
@@ -992,8 +984,7 @@
             // Function to create custom triangle icon
             function createTriangleIcon() {
                 return L.divIcon({
-                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(45deg);"></div>',
-                    className: 'triangle-marker',
+                    html: '<div style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 8px solid #2d00c8; transform: rotate(-45deg);"></div>',                    className: 'triangle-marker',
                     iconSize: [8, 8],
                     iconAnchor: [4, 4]
                 });
@@ -1008,35 +999,85 @@
                         icon: createTriangleIcon()
                     }
                 );
+                // List of points to hide names for
+                const hideNames = ['Hulhumale', 'Matara', 'Machilipatnam', 'Digha', "Cox's Bazar", 'Tanjung Pakis', 
+                                   'Tungku', 'Vung Tau', 'Songkhla', 'Danang', 'Lingshui', 'Shantou', 
+                                   'Fangshan', 'Shima', 'Chongming', 'Morib', 'Melaka', 'Satun', 
+                                   'Baler', 'Luna', 'La Union', 'Bauang'];
+                
+                // List of points to completely remove
+                const removePoints = ['Kauditan', 'Mersing', 'Changi', 'Changi North', 'Tanshui', 
+                                      'Nanhui', 'Chikura', 'Minamiboso'];
+                
+                // Country codes mapping
+                const countryCodes = {
+                    'Malaysia': 'MYS', 'Singapore': 'SGP', 'Indonesia': 'IDN', 
+                    'Philippines': 'PHL', 'Japan': 'JPN', 'China': 'CHN',
+                    'Thailand': 'THA', 'Vietnam': 'VNM', 'India': 'IND',
+                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD'
+                };
                 
                 // Parse name
                 const parts = point.properties.name.split(', ');
                 const location = parts[0];
                 const country = parts.slice(1).join(', ');
                 
-                // Add tooltip
-                marker.bindTooltip(
-                    `<div class="landing-name">${location}</div><div class="landing-country">${country}</div>`,
-                    {
-                        permanent: false,
-                        direction: 'top',
-                        offset: [0, -10],
-                        className: 'landing-tooltip'
-                    }
-                );
+                // Check if we should skip this point entirely
+                if (removePoints.some(name => location.includes(name))) {
+                    return null;
+                }
                 
-                // Add permanent label
-                const label = L.divIcon({
-                    html: `<div class="landing-label">${location}</div>`,
-                    className: 'landing-label-icon',
-                    iconSize: null,
-                    iconAnchor: [-10, 0]
-                });
+                // Rename specific locations
+                let displayName = location;
+                let displayCountry = country;
+                if (location === 'Manado') displayName = 'Manado';
+                if (location === 'Davao') displayName = 'Davao';
+                if (location === 'Tuas') displayName = 'Singapore';
+                if (location === 'Toucheng') displayName = 'Taiwan';
+                if (location === 'Lingang') displayName = 'Shanghai';
+                if (location === 'Maruyama') displayName = 'Tokyo';
+                if (location.includes('Chung Hom Kok') || location.includes('Tseung Kwan O') || location.includes('Lantau')) {
+                    displayName = 'Hong Kong';
+                    displayCountry = 'China';
+                }
+                if (location === 'Kuala Sedili') displayName = 'Sedili';
                 
-                const labelMarker = L.marker([coords[1], coords[0]], {
-                    icon: label,
-                    interactive: false
-                });
+                // Add country code
+                const countryCode = countryCodes[displayCountry] || '';
+                const fullDisplayName = countryCode ? `${displayName}, ${countryCode}` : displayName;
+                
+                // Check if we should hide the name
+                const shouldHideName = hideNames.some(name => location.includes(name));
+                // List of major cities that should have bigger labels
+                const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao'];
+                const isMajorCity = majorCities.includes(displayName);
+                // Add tooltip only if not hiding name
+                if (!shouldHideName) {
+                    marker.bindTooltip(
+                        `<div class="landing-name">${fullDisplayName}</div>`,
+                        {
+                            permanent: false,
+                            direction: 'top',
+                            offset: [0, -10],
+                            className: 'landing-tooltip'
+                        }
+                    );
+                }
+                
+                // Add permanent label only if not hiding name
+                let labelMarker = null;
+                if (!shouldHideName) {
+                    const label = L.divIcon({
+                        html: `<div class="landing-label${isMajorCity ? ' major-city' : ''}">${fullDisplayName}</div>`,                        className: 'landing-label-icon',
+                        iconSize: null,
+                        iconAnchor: [-10, 0]
+                    });
+                    
+                    labelMarker = L.marker([coords[1], coords[0]], {
+                        icon: label,
+                        interactive: false
+                    });
+                }
                 
                 return {marker: marker, label: labelMarker};
             }
@@ -1095,9 +1136,14 @@
             const landingLabelGroup = L.layerGroup();
             
             landingPoints.forEach(point => {
-                const {marker, label} = createLandingPointMarker(point);
-                landingPointGroup.addLayer(marker);
-                landingLabelGroup.addLayer(label);
+                const result = createLandingPointMarker(point);
+                if (result) {
+                    const {marker, label} = result;
+                    landingPointGroup.addLayer(marker);
+                    if (label) {
+                        landingLabelGroup.addLayer(label);
+                    }
+                }
             });
             
             landingPointGroup.addTo(map);
