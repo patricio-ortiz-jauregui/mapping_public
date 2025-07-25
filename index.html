@@ -176,10 +176,10 @@
 
             // Add a light grey base map with no labels
             // Add ESRI gray canvas (very minimal)
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-                attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
-                subdomains: 'abcd',
-                maxZoom: 19
+            L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+                attribution: 'Tiles &copy; Esri',
+                maxZoom: 16,
+                className: 'map-tiles-inverted'
             }).addTo(map);
             // Store all cable layers
             const cableLayers = {};
