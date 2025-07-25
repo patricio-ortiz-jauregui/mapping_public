@@ -169,13 +169,14 @@
             
             // Initialize the map
             const map = L.map('map', {
-                center: [20, 180],  // Center on date line
+                center: [20, 160],  // Center on Pacific
                 zoom: 2,
                 minZoom: 2,
                 maxZoom: 8,
-                worldCopyJump: true,
+                worldCopyJump: false,
                 continuousWorld: true,
-                noWrap: false  // Allow the world to wrap
+                noWrap: false,
+                maxBounds: [[-90, -270], [90, 270]]  // Extended bounds to show wrap
             });
 
             // Add a light grey base map with no labels
