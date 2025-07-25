@@ -1033,7 +1033,8 @@
                     'Malaysia': 'MYS', 'Singapore': 'SGP', 'Indonesia': 'IDN', 
                     'Philippines': 'PHL', 'Japan': 'JPN', 'China': 'CHN',
                     'Thailand': 'THA', 'Vietnam': 'VNM', 'India': 'IND',
-                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD', 'South Korea': 'KQR'
+                    'Sri Lanka': 'LKA', 'Bangladesh': 'BGD', 'South Korea': 'KQR',
+                    'United States': 'USA', 'Mexico': MEX
                 };
                 
                 // Parse name
@@ -1067,6 +1068,15 @@
                     displayName = 'Hawaii';
                     displayCountry = 'USA';
                 }
+                if (location === 'Grover Beach') {
+                    displayCountry = 'USA';
+                }
+                if (location === 'Rosarito') {
+                    displayCountry = 'MEX';
+                }
+                if (location === 'Eureka' || location === 'Winema') {
+                    displayCountry = 'USA';
+                }
                 if (location === 'Kuala Sedili') displayName = 'Sedili';
                 
                 // Add country code
@@ -1076,7 +1086,7 @@
                 // Check if we should hide the name
                 const shouldHideName = hideNames.some(name => location.includes(name));
                 // List of major cities that should have bigger labels
-                const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan'];                const isMajorCity = majorCities.includes(displayName);
+                const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan', 'Grover Beach', 'Rosarito', 'Eureka', 'Winema', 'Hawaii'];                const isMajorCity = majorCities.includes(displayName);
                 // Add tooltip only if not hiding name
                 if (!shouldHideName) {
                     marker.bindTooltip(
