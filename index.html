@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submarine Cable Map</title>
+    <title>Competitive Landscape Cable Map</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         body {
@@ -100,7 +100,7 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
         .map-tiles-inverted {
-            filter: invert(1) hue-rotate(180deg);
+            filter: invert(0.15) contrast(0.85) brightness(1.2);
         }
         .landing-name {
             font-weight: bold;
@@ -181,6 +181,7 @@
             L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
                 attribution: 'Tiles &copy; Esri',
                 maxZoom: 16,
+                className: 'map-tiles-inverted'
             }).addTo(map);
             // Store all cable layers
             const cableLayers = {};
@@ -948,16 +949,22 @@
             ];
 
             // Function to create cable layer
+            // Function to create cable layer
             function createCableLayer(cable) {
+                // Check if this is a planned cable
+                const isPlanned = ['echo', 'bifrost'].includes(cable.properties.id);
+                
                 const cableLayer = L.geoJSON(cable, {
                     style: {
                         color: cable.properties.color || '#4eb748',
                         weight: 3,
                         opacity: 0.8,
-                        smoothFactor: 1
+                        smoothFactor: 1,
+                        // Add dash pattern for planned cables
+                        dashArray: isPlanned ? '10, 10' : null
                     }
                 });
-                
+                            
                 // Add interactivity
                 cableLayer.eachLayer(function(layer) {
                     // Add tooltip
