@@ -1034,7 +1034,7 @@
                     'Philippines': 'PHL', 'Japan': 'JPN', 'China': 'CHN',
                     'Thailand': 'THA', 'Vietnam': 'VNM', 'India': 'IND',
                     'Sri Lanka': 'LKA', 'Bangladesh': 'BGD', 'South Korea': 'KQR',
-                    'United States': 'USA', 'Mexico': 'MEX', 'USA': 'USA'
+                    'United States': 'USA', 'Mexico': 'MEX'
                 };
                 
                 // Parse name
@@ -1087,8 +1087,9 @@
                 const shouldHideName = hideNames.some(name => location.includes(name));
                 // List of major cities that should have bigger labels
                 const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 
-                     'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan',
-                     'Grover Beach', 'Rosarito', 'Eureka', 'Winema', 'Hawaii'];                // Add tooltip only if not hiding name
+                                     'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan',
+                                     'Grover Beach', 'Rosarito', 'Eureka', 'Winema', 'Hawaii'];
+                // Add tooltip only if not hiding name
                 if (!shouldHideName) {
                     marker.bindTooltip(
                         `<div class="landing-name">${fullDisplayName}</div>`,
