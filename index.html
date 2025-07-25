@@ -349,6 +349,54 @@
                         "type": "MultiLineString",
                         "coordinates": [[[103.91973061822782,1.172215972443871],[103.98701057056589,1.389451396800233]],[[80.24298739105474,13.06385310188338],[81.45001653598388,12.175887185507976],[83.70001494206389,10.41081650540272],[89.10001111665605,9.08033076823294],[93.1500082476,8.518425924569478],[95.40000665368001,7.521883237406507],[97.42500521915215,6.5728695185769],[99.2250039440161,5.286069860821008],[100.01250338614413,4.613591578862773],[100.57500298766413,3.266814816815666],[101.25000250948806,2.592701464601932],[102.15000187192003,2.086875539277345],[102.68279723997186,1.726894676446862],[103.34065102845322,1.327793781945009],[103.50000091556807,1.243290124212273],[103.91973061822782,1.172215972443871]]]
                     }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "id": "scnx1",
+                        "name": "SubConnex SCNX1",
+                        "color": "#000000"
+                    },
+                    "geometry": {
+                        "type": "MultiLineString",
+                        "coordinates": [[[103.64707112328632,1.338192522185158],[104.01664054897991,1.066796188550793],[106.82785500280222,-6.171598654655946],[124.83960982123124,1.490831387793467]]]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "id": "scnx2",
+                        "name": "SubConnex SCNX2",
+                        "color": "#000000"
+                    },
+                    "geometry": {
+                        "type": "MultiLineString",
+                        "coordinates": [[[124.83960982123124,1.490831387793467],[144.69474214461212,13.464655237903562]]]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "id": "scnx3",
+                        "name": "SubConnex SCNX3",
+                        "color": "#000000"
+                    },
+                    "geometry": {
+                        "type": "MultiLineString",
+                        "coordinates": [[[80.24308379664043,13.06348539106232],[104.11,1.36],[103.64707112328632,1.338192522185158],[104.01664054897991,1.066796188550793]]]
+                    }
+                },
+                {
+                    "type": "Feature",
+                    "properties": {
+                        "id": "scnx4",
+                        "name": "SubConnex SCNX4",
+                        "color": "#000000"
+                    },
+                    "geometry": {
+                        "type": "MultiLineString",
+                        "coordinates": [[[144.69474214461212,13.464655237903562],[-118.39954892055475,33.862232632157735]]]
+                    }
                 }
             ];
 
@@ -948,6 +996,14 @@
                     "geometry": {
                         "coordinates": [-123.97340470108611, 45.146590041565254]
                     }
+                },
+                {
+                    "properties": {
+                        "name": "Rengit, Malaysia"
+                    },
+                    "geometry": {
+                        "coordinates": [104.11, 1.36]
+                    }
                 }
             ];
 
@@ -955,7 +1011,7 @@
             // Function to create cable layer
             function createCableLayer(cable) {
                 // Check if this is a planned cable
-                const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2'].includes(cable.properties.id);
+                const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2', 'scnx1', 'scnx2', 'scnx3', 'scnx4'].includes(cable.properties.id);
                 
                 // Use Leaflet.antimeridian to handle date line crossing
                 const cableLayer = L.geoJSON(cable, {
@@ -1157,7 +1213,7 @@
                 colorBox.className = 'cable-color';
                 
                 // Check if this is a planned cable
-                const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2'].includes(cable.properties.id);
+                const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2', 'scnx1', 'scnx2', 'scnx3', 'scnx4'].includes(cable.properties.id);
                 
                 if (isPlanned) {
                     // Create dashed line using gradient
