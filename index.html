@@ -170,13 +170,12 @@
                 worldCopyJump: true
             });
 
-            // Add a light grey base map
-            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            // Add a light grey base map with no labels
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
                 attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
                 subdomains: 'abcd',
                 maxZoom: 19
             }).addTo(map);
-
             // Store all cable layers
             const cableLayers = {};
             
