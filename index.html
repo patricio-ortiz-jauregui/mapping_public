@@ -1026,7 +1026,7 @@
                                       'Nanhui', 'Chikura', 'Minamiboso', 'Karachi', 'Cherating', 
                                       'Ngeremlengui', 'Magachgil', 'Quy Nhon', 'Chung Hom Kok', 
                                       'Tseung Kwan O', 'Agat', 'Alupang', 'Tanguisson Point',
-                                      'Toucheng', 'Colombo', 'Batangas'];
+                                      'Toucheng', 'Colombo', 'Batangas', 'Makaha', 'Morro Bay', 'Hermosa Beach'];
                 
                 // Country codes mapping
                 const countryCodes = {
@@ -1055,6 +1055,14 @@
                 if (location === 'Toucheng') displayName = 'Taiwan';
                 if (location === 'Lingang') displayName = 'Shanghai';
                 if (location === 'Maruyama') displayName = 'Tokyo';
+                if (location === 'Piti') {
+                    displayName = 'Guam';
+                    displayCountry = 'Guam';
+                }
+                if (location === 'Keawaula') {
+                    displayName = 'Hawaii';
+                    displayCountry = 'USA';
+                }
                 if (location.includes('Chung Hom Kok') || location.includes('Tseung Kwan O') || location.includes('Lantau')) {
                     displayName = 'Hong Kong';
                     displayCountry = 'China';
