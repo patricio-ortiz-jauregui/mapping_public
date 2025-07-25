@@ -955,7 +955,7 @@
             // Function to create cable layer
             function createCableLayer(cable) {
                 // Check if this is a planned cable
-                const isPlanned = ['echo', 'bifrost'].includes(cable.properties.id);
+                const isPlanned = ['echo', 'bifrost', 'asia-link-cable-alc', 'apricot', 'southeast-asia-japan-cable-2-sjc2'].includes(cable.properties.id);
                 
                 const cableLayer = L.geoJSON(cable, {
                     style: {
