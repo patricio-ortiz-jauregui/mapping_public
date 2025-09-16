@@ -1010,7 +1010,8 @@
                 // Check if we should hide the name
                 const shouldHideName = hideNames.some(name => location.includes(name));
                 // List of major cities that should have bigger labels
-                // const majorCities = ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan', 'Grover Beach', 'Rosarito', 'Eureka', 'Winema', 'Hawaii'];                const isMajorCity = majorCities.includes(displayName);
+                const majorCities = ['Hong Kong']
+                    // ['Hong Kong', 'Singapore', 'Tokyo', 'Shanghai', 'Manado', 'Davao', 'Mumbai', 'Chennai', 'Jakarta', 'Batam', 'Sedili', 'Guam', 'Busan', 'Grover Beach', 'Rosarito', 'Eureka', 'Winema', 'Hawaii'];                const isMajorCity = majorCities.includes(displayName);
                 // Add tooltip only if not hiding name
                 if (!shouldHideName) {
                     marker.bindTooltip(
